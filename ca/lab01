@@ -1,4 +1,4 @@
-                  -`					           odmen@odmen-xps 
+                   -`					           odmen@odmen-xps 
                   .o+`                   --------------- 
                  `ooo/                   OS: Arch Linux x86_64 
                 `+oooo:                  Host: XPS 9320 
@@ -19,9 +19,10 @@
  .`                                 `/                           
                                                                  
 
+update: forced to use "power" cores via taskset
 
-Python:	idk im too lazy to wait, i'll update later
-Java:	4.3973932200000005
-C basic:	7.375278
-C ikj:	3.816659
-C jki:	24.973204
+Python: 247.771906	
+Java:	  4.3973932200000005
+C:      3.670891
+C ikj:	3.654953
+C jki:  27.211149	
