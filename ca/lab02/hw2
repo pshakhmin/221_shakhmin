@@ -1,0 +1,149 @@
+1.
+	Unsigned:
+		0 -> 000000 (obviously)
+		13 = 8 + 4 + 1 = 001101 
+		24 = 16 + 8 = 011000
+		63 = 64 - 1 = 111111
+
+
+	Signed:
+		16 = 2**4 = 001000
+		-2:
+			2       = 000010
+			inv		= 111101
+			inv + 1	= 111110
+			=> -2 = 111110
+
+		31 = 32 - 1 = 011111
+
+		-32:
+			32		= 2**5 = 100000 
+			inv		= 011111
+			inv + 1 = 100000
+			=> -32 = 100000 (obviously, because the interval of 6-bit signed is [-32,31])
+
+
+2.
+	unsigned(ez lol):
+		000101 = 1 + 4 = 5
+		101011 = 1 + 2 + 8 + 32 = 43
+		111111 = 2**6 - 1 = 63 
+		100000 = 2**5 = 32
+
+
+	signed:
+		000101 = 5 (sign bit is unset => it is positive)
+		101011:
+			101011 - 1 = 101010
+			inv		   = 10101
+			10101	   = 21
+			101011	   = -21
+
+		111111 = -1 (all bits are set)
+		100000 = -32 (all bits are unset except for sign bit)
+
+		
+3.
+	7	= 0x07
+	240 = 16 * 15 = 0xf0
+	171 = 16 * 10 + 11 = 0xAB
+	126 = 16 * 7 + 14 = 0x7E
+
+
+4.
+	0x3C = 0011 1100 (by quartets using the table) 
+	0x7E = 0111 1110 (E = 14 = 1110)
+	0xFF = 1111 1111 (max 8-bit number)
+	0xA5 = 1010 0101 (A = 10 = 1010)
+
+5.
+I hope that in this task I just need to "add minus in decimal notation" and I am not limited by 8 bits
+	0x3C:
+		direct  = 1011 1100 (setting sign bit)
+		inv     = 1100 0011
+		inv + 1 = 1100 0100
+		
+	0x7E:
+		direct  = 1111 1110 
+		inv		= 1000 0001
+		inv + 1 = 1000 0010
+	
+	0xFF = 100000000 (min 9-bit number, because signed 8 bits contain [-128, 127])
+
+	0xA5:
+		direct  = 1 1010 0101 (adding sign bit)
+		inv     = 1 0101 1010
+		inv + 1 = 1 0101 1011 
+
+6.
+	0xDEADBEEF:
+		Big endian:
+			"adress" -   1  2  3  4
+			bytes    - 0xDE AD BE EF
+
+		Little endian:
+			"adress" -   1  2  3  4
+			number	 - 0xEF BE AD DE
+	
+		
+7.
+	converting:
+		7 = 1 + 2 + 4 = 00111
+		15 = 1 + 2 + 4 + 8 = 01111
+		-16 = 10000
+		-5 = 1 + 4 -> 00101 -> 11010 -> 11011
+
+	extension:
+		00111 -> 00000111
+		01111 -> 00001111
+		10000 -> 11110000
+		11011 -> 11111011
+
+8.
+	unsigned:
+		7  -> 0111
+		9  -> 1001
+		sum: 10000 (4-bit overflow)
+
+	signed:
+		4  -> 0100
+		-5 -> 1011
+		sum:  1111
+
+
+
+Additionally:
+
+12.
+	x = x ^ y;
+	y = x ^ y;
+	x = x ^ y;
+
+	tracing the operations:
+	operation		value X				value Y
+	init			X					Y
+	x = x ^ y		X ^ Y				Y
+	y = x ^ y		X ^ Y				(X ^ Y) ^ Y = X
+	x = X ^ Y	    (X ^ Y) ^ X = Y		X	
+
+
+16. 
+	x & (x - 1) - turning off the rightmost 1-bit
+
+	x - 1 unsets all bits from the rightmost 1 (including it)
+	for ex:
+		10101010 - 1 = 10101000
+			  **	         **
+	=> bitmasking with x-1 unsets the rightmost bit set
+
+
+	x | (x + 1) - turning on the rightmost 0-bit
+	x + 1 does the opposite from x - 1. it sets all bits from the rightmost 0
+	or (|) serves as a bitmask to set all bits
+
+	
+	x | (x - 1) - turning on the trailing 0’s
+	x - 1 unsets all bits from the rightmost 1 (including it)
+	=> masking (using or) sets all the rightmost bits
+
+
