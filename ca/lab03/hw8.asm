@@ -13,13 +13,13 @@ main:
 
     addi t0, t0, 5
     div t0, t0, t1
-    addi t0, t0, 10
     
+    
+    addi t4, zero, 10
     addi t3, t1, -1
     
-    
-    div t0, t0, t3
-    
+    div t4, t4, t3
+    add t0, t0, t4
     
     add a0, zero, t0
     addi a7, zero, 1
